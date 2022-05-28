@@ -7,12 +7,7 @@ var serverConnection;
 
 var peerConnectionConfig = {
   'iceServers': [
-    { 'urls': 'stun:stun.szfjg.cf:5349' },
-    {
-      'urls': 'turn:turn.szfjg.cf:5349',
-      'username': 'beyondkmp',
-      'credential': 'fpll123'
-    }
+    {'urls': 'stun:67.230.176.239:3478'},
   ]
 };
 
