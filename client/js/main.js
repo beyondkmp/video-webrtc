@@ -89,7 +89,7 @@ function sendMessage(roomid, data) {
 
 function conn() {
 
-	socket = io.connect();
+	socket = io.connect("https://szfjg.cf/xxxxxyyyyy");
 
 	socket.on('joined', (roomid, id) => {
 		console.log('receive joined message!', roomid, id);
