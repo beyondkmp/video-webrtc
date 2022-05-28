@@ -1,7 +1,6 @@
-import * as express from 'express';
-import * as socketIO from "socket.io";
+import {Server} from "socket.io";
 import log4js from 'log4js';
-import http from 'http';
+import { createServer } from "http";
 
 const USER_COUNT = 3;
 
@@ -26,13 +25,8 @@ log4js.configure({
 
 const logger = log4js.getLogger();
 
-const app = express.default();
-app.get("/", (_req, res) => {
-	res.send({ uptime: process.uptime() });
-})
-//http server
-const http_server = http.createServer(app);
-const io = new socketIO.Server(http_server);
+const http_server = createServer();
+const io = new Server(http_server, {path:'/xxxxxyyyyy'});
 
 io.sockets.on('connection', (socket) => {
 	socket.on('message', (room, data) => {
