@@ -1,0 +1,94 @@
+02:11:50 DEBUG - the user number of room (1234) is: 0
+02:12:42 DEBUG - the user number of room (1234) is: 0
+02:13:28 DEBUG - the user number of room (1234) is: 0
+02:14:24 DEBUG - the user number of room is: 0
+02:14:26 DEBUG - the user number of room (1234) is: 0
+02:14:46 DEBUG - the user number of room (1234) is: 0
+02:20:35 DEBUG - join, room: 1234 Map(4) {
+  'K-lZa6vxlD9d3gfiAAAB' => Set(1) { 'K-lZa6vxlD9d3gfiAAAB' },
+  '2mjtcXrHfdTP8vlUAAAD' => Set(1) { '2mjtcXrHfdTP8vlUAAAD' },
+  'G3SmOR6hfqX4VUz0AAAF' => Set(1) { 'G3SmOR6hfqX4VUz0AAAF' },
+  '1234' => Set(1) { 'G3SmOR6hfqX4VUz0AAAF' }
+}
+02:20:35 DEBUG - the user number of room (1234) is: 0
+02:21:52 DEBUG - join, room: 1234 Map(4) {
+  '2mjtcXrHfdTP8vlUAAAD' => Set(1) { '2mjtcXrHfdTP8vlUAAAD' },
+  'G3SmOR6hfqX4VUz0AAAF' => Set(1) { 'G3SmOR6hfqX4VUz0AAAF' },
+  '1234' => Set(2) { 'G3SmOR6hfqX4VUz0AAAF', 'eznBN7frJW8xeZIUAAAH' },
+  'eznBN7frJW8xeZIUAAAH' => Set(1) { 'eznBN7frJW8xeZIUAAAH' }
+}
+02:21:52 DEBUG - the user number of room (1234) is: 0
+02:21:59 DEBUG - the user number of room is: 0
+02:22:01 DEBUG - join, room: 1234 Map(4) {
+  '2mjtcXrHfdTP8vlUAAAD' => Set(1) { '2mjtcXrHfdTP8vlUAAAD' },
+  'G3SmOR6hfqX4VUz0AAAF' => Set(1) { 'G3SmOR6hfqX4VUz0AAAF' },
+  '1234' => Set(2) { 'G3SmOR6hfqX4VUz0AAAF', 'DB7ln-w-Ae3pqoKMAAAJ' },
+  'DB7ln-w-Ae3pqoKMAAAJ' => Set(1) { 'DB7ln-w-Ae3pqoKMAAAJ' }
+}
+02:22:01 DEBUG - the user number of room (1234) is: 0
+02:23:37 DEBUG - join, room: 1234 Map(4) {
+  'cOlt--o_BkRlD_s0AAAB' => Set(1) { 'cOlt--o_BkRlD_s0AAAB' },
+  'DKw3HePZH7XVld19AAAD' => Set(1) { 'DKw3HePZH7XVld19AAAD' },
+  'eUaA1DrKyVkujtU-AAAH' => Set(1) { 'eUaA1DrKyVkujtU-AAAH' },
+  '1234' => Set(1) { 'eUaA1DrKyVkujtU-AAAH' }
+} undefined
+02:23:37 DEBUG - the user number of room (1234) is: 0
+02:25:20 DEBUG - join, room: 1234 Map(4) {
+  'RbCq2EJwJBUGh4pSAAAD' => Set(1) { 'RbCq2EJwJBUGh4pSAAAD' },
+  'Tp8f2R9lJ4fjyJJsAAAF' => Set(1) { 'Tp8f2R9lJ4fjyJJsAAAF' },
+  'qZD6bruDew4ZErtRAAAH' => Set(1) { 'qZD6bruDew4ZErtRAAAH' },
+  '1234' => Set(1) { 'qZD6bruDew4ZErtRAAAH' }
+} Set(1) { 'qZD6bruDew4ZErtRAAAH' }
+02:25:20 DEBUG - the user number of room (1234) is: 1
+02:25:29 DEBUG - join, room: 1234 Map(4) {
+  'Tp8f2R9lJ4fjyJJsAAAF' => Set(1) { 'Tp8f2R9lJ4fjyJJsAAAF' },
+  'qZD6bruDew4ZErtRAAAH' => Set(1) { 'qZD6bruDew4ZErtRAAAH' },
+  '1234' => Set(2) { 'qZD6bruDew4ZErtRAAAH', 'sQWUfoLcdKNQDqjfAAAJ' },
+  'sQWUfoLcdKNQDqjfAAAJ' => Set(1) { 'sQWUfoLcdKNQDqjfAAAJ' }
+} Set(2) { 'qZD6bruDew4ZErtRAAAH', 'sQWUfoLcdKNQDqjfAAAJ' }
+02:25:29 DEBUG - the user number of room (1234) is: 2
+02:25:29 DEBUG - message, room: 1234, data, type:offer
+02:25:29 DEBUG - message, room: 1234, data, type:candidate
+02:25:29 DEBUG - message, room: 1234, data, type:candidate
+02:25:29 DEBUG - message, room: 1234, data, type:answer
+02:25:29 DEBUG - message, room: 1234, data, type:candidate
+02:25:44 DEBUG - the user number of room is: 0
+02:25:46 DEBUG - join, room: 1234 Map(4) {
+  'Tp8f2R9lJ4fjyJJsAAAF' => Set(1) { 'Tp8f2R9lJ4fjyJJsAAAF' },
+  'qZD6bruDew4ZErtRAAAH' => Set(1) { 'qZD6bruDew4ZErtRAAAH' },
+  '1234' => Set(2) { 'qZD6bruDew4ZErtRAAAH', 'n5A4GxZO9eoSloGIAAAL' },
+  'n5A4GxZO9eoSloGIAAAL' => Set(1) { 'n5A4GxZO9eoSloGIAAAL' }
+} Set(2) { 'qZD6bruDew4ZErtRAAAH', 'n5A4GxZO9eoSloGIAAAL' }
+02:25:46 DEBUG - the user number of room (1234) is: 2
+02:25:46 DEBUG - message, room: 1234, data, type:offer
+02:25:46 DEBUG - message, room: 1234, data, type:candidate
+02:25:46 DEBUG - message, room: 1234, data, type:candidate
+02:25:46 DEBUG - message, room: 1234, data, type:answer
+02:25:46 DEBUG - message, room: 1234, data, type:candidate
+02:25:48 DEBUG - the user number of room is: 0
+02:25:54 DEBUG - join, room: 1234 Map(4) {
+  'Tp8f2R9lJ4fjyJJsAAAF' => Set(1) { 'Tp8f2R9lJ4fjyJJsAAAF' },
+  'qZD6bruDew4ZErtRAAAH' => Set(1) { 'qZD6bruDew4ZErtRAAAH' },
+  '1234' => Set(2) { 'qZD6bruDew4ZErtRAAAH', '0V3iI9i1Noq9Hx3OAAAN' },
+  '0V3iI9i1Noq9Hx3OAAAN' => Set(1) { '0V3iI9i1Noq9Hx3OAAAN' }
+} Set(2) { 'qZD6bruDew4ZErtRAAAH', '0V3iI9i1Noq9Hx3OAAAN' }
+02:25:54 DEBUG - the user number of room (1234) is: 2
+02:25:54 DEBUG - message, room: 1234, data, type:offer
+02:25:54 DEBUG - message, room: 1234, data, type:candidate
+02:25:54 DEBUG - message, room: 1234, data, type:candidate
+02:25:54 DEBUG - message, room: 1234, data, type:answer
+02:25:54 DEBUG - message, room: 1234, data, type:candidate
+02:29:40 DEBUG - the user number of room (1234) is: 1
+02:29:43 DEBUG - the user number of room (1234) is: 2
+02:29:43 DEBUG - message, room: 1234, data, type:offer
+02:29:43 DEBUG - message, room: 1234, data, type:candidate
+02:29:43 DEBUG - message, room: 1234, data, type:candidate
+02:29:43 DEBUG - message, room: 1234, data, type:answer
+02:29:43 DEBUG - message, room: 1234, data, type:candidate
+02:29:50 DEBUG - the user number of room is: 1
+02:29:58 DEBUG - the user number of room (1234) is: 2
+02:29:58 DEBUG - message, room: 1234, data, type:offer
+02:29:58 DEBUG - message, room: 1234, data, type:candidate
+02:29:58 DEBUG - message, room: 1234, data, type:candidate
+02:29:58 DEBUG - message, room: 1234, data, type:answer
+02:29:58 DEBUG - message, room: 1234, data, type:candidate

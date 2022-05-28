@@ -1,6 +1,5 @@
 import {Server} from "socket.io";
 import log4js from 'log4js';
-import { createServer } from "http";
 
 const USER_COUNT = 3;
 
@@ -25,8 +24,7 @@ log4js.configure({
 
 const logger = log4js.getLogger();
 
-const http_server = createServer();
-const io = new Server(http_server, {path:'/xxxxxyyyyy'});
+const io = new Server().listen(8081,{transports: ["websocket"] , path:'/xxxxxyyyyy'});
 
 io.sockets.on('connection', (socket) => {
 	socket.on('message', (room, data) => {
@@ -36,8 +34,8 @@ io.sockets.on('connection', (socket) => {
 
 	socket.on('join', (room) => {
 		socket.join(room);
-		const myRoom = io.sockets.adapter.rooms[room];
-		const users = (myRoom) ? Object.keys(myRoom.sockets).length : 0;
+		const myRoom = io.sockets.adapter.rooms.get(room);
+		const users = myRoom? myRoom.size:0;
 		logger.debug('the user number of room (' + room + ') is: ' + users);
 
 		if (users < USER_COUNT) {
@@ -59,8 +57,8 @@ io.sockets.on('connection', (socket) => {
 
 		socket.leave(room);
 
-		const myRoom = io.sockets.adapter.rooms[room];
-		const users = (myRoom) ? Object.keys(myRoom.sockets).length : 0;
+		const myRoom = io.sockets.adapter.rooms.get(room);
+		const users = myRoom? myRoom.size:0;
 		logger.debug('the user number of room is: ' + users);
 
 		//socket.emit('leaved', room, socket.id);
@@ -71,8 +69,5 @@ io.sockets.on('connection', (socket) => {
 	});
 
 });
-
-http_server.listen(8081, '127.0.0.1');
-
 
 

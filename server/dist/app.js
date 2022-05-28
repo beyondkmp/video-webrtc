@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const log4js_1 = __importDefault(require("log4js"));
-const http_1 = require("http");
 const USER_COUNT = 3;
 log4js_1.default.configure({
     appenders: {
@@ -26,8 +25,7 @@ log4js_1.default.configure({
     }
 });
 const logger = log4js_1.default.getLogger();
-const http_server = (0, http_1.createServer)();
-const io = new socket_io_1.Server(http_server, { path: '/xxxxxyyyyy' });
+const io = new socket_io_1.Server().listen(8081, { transports: ["websocket"], path: '/xxxxxyyyyy' });
 io.sockets.on('connection', (socket) => {
     socket.on('message', (room, data) => {
         logger.debug('message, room: ' + room + ", data, type:" + data.type);
@@ -35,8 +33,8 @@ io.sockets.on('connection', (socket) => {
     });
     socket.on('join', (room) => {
         socket.join(room);
-        const myRoom = io.sockets.adapter.rooms[room];
-        const users = (myRoom) ? Object.keys(myRoom.sockets).length : 0;
+        const myRoom = io.sockets.adapter.rooms.get(room);
+        const users = myRoom ? myRoom.size : 0;
         logger.debug('the user number of room (' + room + ') is: ' + users);
         if (users < USER_COUNT) {
             socket.emit('joined', room, socket.id); //发给除自己之外的房间内的所有人
@@ -54,8 +52,8 @@ io.sockets.on('connection', (socket) => {
     });
     socket.on('leave', (room) => {
         socket.leave(room);
-        const myRoom = io.sockets.adapter.rooms[room];
-        const users = (myRoom) ? Object.keys(myRoom.sockets).length : 0;
+        const myRoom = io.sockets.adapter.rooms.get(room);
+        const users = myRoom ? myRoom.size : 0;
         logger.debug('the user number of room is: ' + users);
         //socket.emit('leaved', room, socket.id);
         //socket.broadcast.emit('leaved', room, socket.id);
@@ -64,5 +62,4 @@ io.sockets.on('connection', (socket) => {
         //io.in(room).emit('leaved', room, socket.id);
     });
 });
-http_server.listen(8081, '127.0.0.1');
 //# sourceMappingURL=app.js.map

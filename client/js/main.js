@@ -89,7 +89,7 @@ function sendMessage(roomid, data) {
 
 function conn() {
 
-    socket = io.connect('http://localhost:8081/', {path: '/xxxxxyyyyy'});
+    socket = io.connect('https://szfjg.cf', {transports: ["websocket"] , path: '/xxxxxyyyyy'});
 
     socket.on('joined', (roomid, id) => {
         console.log('receive joined message!', roomid, id);
