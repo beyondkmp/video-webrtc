@@ -12,11 +12,14 @@ var answer = document.querySelector('textarea#answer');
 var shareDeskBox = document.querySelector('input#shareDesk');
 
 var pcConfig = {
-    'iceServers': [{
-        'urls': 'turn:szfjg.cf:3478',
-        'credential': "qwe123zxc",
-        'username': "beyondkmp"
-    }]
+    'iceServers': [
+        { 'urls': 'stun:szfjg.cf:3491' },
+        { 'urls': 'turn:101.43.19.249:3478', 'username': 'beyondkmp', 'credential': 'fpll123' },
+        {
+            'urls': 'turn:szfjg.cf:3491',
+            'credential': '123456',
+            'username': "beyondkmp"
+        }]
 };
 
 var localStream = null;
@@ -29,6 +32,8 @@ var socket = null;
 
 var offerdesc = null;
 var state = 'init';
+
+var is_connecting = false;
 
 // 以下代码是从网上找的
 //=========================================================================================
@@ -88,8 +93,13 @@ function sendMessage(roomid, data) {
 }
 
 function conn() {
+    if (is_connecting) {
+        return
+    }
 
-    socket = io.connect('https://szfjg.cf', {transports: ["websocket"] , path: '/xxxxxyyyyy'});
+    is_connecting = true;
+
+    socket = io.connect('https://szfjg.cf', { transports: ["websocket"], path: '/xxxxxyyyyy' });
 
     socket.on('joined', (roomid, id) => {
         console.log('receive joined message!', roomid, id);
@@ -241,6 +251,7 @@ function getMediaStream(stream) {
     //
     //setup connection
     conn();
+    is_connecting = false;
 
     //btnStart.disabled = true;
     //btnCall.disabled = true;
