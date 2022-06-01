@@ -13,7 +13,9 @@ var shareDeskBox = document.querySelector('input#shareDesk');
 
 var pcConfig = {
     'iceServers': [
-        { 'urls': ['stun:101.43.19.249:3478', 'stun:szfjg.cf:3478'] },
+        {
+            'urls': ['stun:101.43.19.249:3478', 'stun:szfjg.cf:3478']
+        },
         {
             'urls': ['turn:101.43.19.249:3478', 'turn:szfjg.cf:3478'],
             'username': 'test',
@@ -331,21 +333,21 @@ function handleAnswerError(err) {
 }
 
 function getAnswer(desc) {
-    pc.setLocalDescription(desc);
+    pc.setLocalDescription(desc)
+        .then(() => {
+            //send answer sdp
+            sendMessage(roomid, desc)
+        })
     answer.value = desc.sdp;
-
-    //send answer sdp
-    sendMessage(roomid, desc);
 }
 
 function getOffer(desc) {
-    pc.setLocalDescription(desc);
+    pc.setLocalDescription(desc).then(() => {
+        //send offer sdp
+        offerdesc = desc;
+        sendMessage(roomid, offerdesc);
+    })
     offer.value = desc.sdp;
-    offerdesc = desc;
-
-    //send offer sdp
-    sendMessage(roomid, offerdesc);
-
 }
 
 function createPeerConnection() {
