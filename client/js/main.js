@@ -13,13 +13,17 @@ var shareDeskBox = document.querySelector('input#shareDesk');
 
 var pcConfig = {
     'iceServers': [
-        { 'urls': 'stun:szfjg.cf:3491' },
-        { 'urls': 'turn:101.43.19.249:3478', 'username': 'beyondkmp', 'credential': 'fpll123' },
+        { 'urls': ['stun:101.43.19.249:3478', 'stun:szfjg.cf:3478'] },
         {
-            'urls': 'turn:szfjg.cf:3491',
+            'urls': ['turn:101.43.19.249:3478', 'turn:szfjg.cf:3478'],
+            'username': 'test',
             'credential': '123456',
-            'username': "beyondkmp"
-        }]
+            'credentialType': 'password'
+        },
+    ],
+    'iceTransportPolicy': 'all',
+    'bundlePolicy': 'max-bundle',
+    'rtcpMuxPolicy': 'require'
 };
 
 var localStream = null;
@@ -32,8 +36,6 @@ var socket = null;
 
 var offerdesc = null;
 var state = 'init';
-
-var is_connecting = false;
 
 // 以下代码是从网上找的
 //=========================================================================================
@@ -93,12 +95,6 @@ function sendMessage(roomid, data) {
 }
 
 function conn() {
-    if (is_connecting) {
-        return
-    }
-
-    is_connecting = true;
-
     socket = io.connect('https://szfjg.cf', { transports: ["websocket"], path: '/xxxxxyyyyy' });
 
     socket.on('joined', (roomid, id) => {
@@ -251,7 +247,6 @@ function getMediaStream(stream) {
     //
     //setup connection
     conn();
-    is_connecting = false;
 
     //btnStart.disabled = true;
     //btnCall.disabled = true;
