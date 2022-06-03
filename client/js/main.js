@@ -38,6 +38,7 @@ var socket = null;
 
 var offerdesc = null;
 var state = 'init';
+var isPCofRemote = false;
 
 // 以下代码是从网上找的
 //=========================================================================================
@@ -99,8 +100,8 @@ function sendMessage(roomid, data) {
 function conn() {
     socket = io.connect('https://szfjg.cf', { transports: ["websocket"], path: '/xxxxxyyyyy' });
 
-    socket.on('joined', (roomid, id) => {
-        console.log('receive joined message!', roomid, id);
+    socket.on('joined', (roomid, id, isPc) => {
+        console.log('receive joined message!', roomid, id, isPc);
         state = 'joined'
 
         //如果是多人的话，第一个人不该在这里创建peerConnection
@@ -116,7 +117,7 @@ function conn() {
         console.log('receive joined message, state=', state);
     });
 
-    socket.on('otherjoin', (roomid) => {
+    socket.on('otherjoin', (roomid, isPc) => {
         console.log('receive joined message:', roomid, state);
 
         //如果是多人的话，每上来一个人都要创建一个新的 peerConnection
@@ -127,6 +128,8 @@ function conn() {
         }
 
         state = 'joined_conn';
+        isPCofRemote = isPc;
+        isPCofRemote && setCodec();
         call();
 
         console.log('receive other_join message, state=', state);
@@ -193,7 +196,7 @@ function conn() {
             pc.setRemoteDescription(new RTCSessionDescription(data));
 
             //create answer
-            setCodec();
+            isPCofRemote && setCodec();
             pc.createAnswer()
                 .then(getAnswer)
                 .catch(handleAnswerError);
@@ -218,7 +221,7 @@ function conn() {
 
 
     roomid = getQueryVariable('room');
-    socket.emit('join', roomid);
+    socket.emit('join', roomid, IsPC());
 
     return true;
 }
@@ -407,10 +410,6 @@ function bindTracks() {
 
 function setCodec() {
     // note the following should be called before before calling either RTCPeerConnection.createOffer() or createAnswer()
-    if(!IsPC()){
-        return
-    }
-
     let codecs = RTCRtpReceiver.getCapabilities('video').codecs;
     let vp9_codecs = [];
     // iterate over supported codecs and pull out the codecs we want
@@ -427,7 +426,7 @@ function setCodec() {
     }
 }
 
-function call() {
+function call(isPc) {
 
     if (state === 'joined_conn') {
 
@@ -437,7 +436,7 @@ function call() {
         }
 
         // set vp9
-        setCodec();
+        isPc && setCodec();
         pc.createOffer(offerOptions)
             .then(getOffer)
             .catch(handleOfferError);

@@ -32,16 +32,16 @@ io.sockets.on('connection', (socket) => {
 		socket.to(room).emit('message', room, data);
 	});
 
-	socket.on('join', (room) => {
+	socket.on('join', (room, IsPC) => {
 		socket.join(room);
 		const myRoom = io.sockets.adapter.rooms.get(room);
 		const users = myRoom? myRoom.size:0;
 		logger.debug('the user number of room (' + room + ') is: ' + users);
 
 		if (users < USER_COUNT) {
-			socket.emit('joined', room, socket.id); //发给除自己之外的房间内的所有人
+			socket.emit('joined', room, socket.id, IsPC); //发给除自己之外的房间内的所有人
 			if (users > 1) {
-				socket.to(room).emit('otherjoin', room, socket.id);
+				socket.to(room).emit('otherjoin', room, socket.id, IsPC);
 			}
 
 		} else {
