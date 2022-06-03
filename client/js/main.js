@@ -129,7 +129,7 @@ function conn() {
 
         state = 'joined_conn';
         isPCofRemote = isPc;
-        isPCofRemote && setCodec();
+        setCodec();
         call();
 
         console.log('receive other_join message, state=', state);
@@ -196,7 +196,7 @@ function conn() {
             pc.setRemoteDescription(new RTCSessionDescription(data));
 
             //create answer
-            isPCofRemote && setCodec();
+            setCodec();
             pc.createAnswer()
                 .then(getAnswer)
                 .catch(handleAnswerError);
@@ -411,11 +411,11 @@ function bindTracks() {
 function setCodec() {
     // note the following should be called before before calling either RTCPeerConnection.createOffer() or createAnswer()
     let codecs = RTCRtpReceiver.getCapabilities('video').codecs;
+    let matchCodec = isPCofRemote ? "video/AV1" : "video/VP9";
     let vp9_codecs = [];
     // iterate over supported codecs and pull out the codecs we want
     for (let i = 0; i < codecs.length; i++) {
-        console.info('codecs:', codecs[i].mimeType);
-        if (codecs[i].mimeType == "video/AV1") {
+        if (codecs[i].mimeType == matchCodec) {
             vp9_codecs.push(codecs[i]);
         }
     }
