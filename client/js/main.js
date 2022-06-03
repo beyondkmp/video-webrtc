@@ -14,11 +14,11 @@ var shareDeskBox = document.querySelector('input#shareDesk');
 var pcConfig = {
     'iceServers': [
         {
-            'urls': ['stun:101.43.19.249:3478', 'stun:szfjg.cf:3478']
+            'urls': ['stun:stun.szfjg.cf:3478']
         },
         {
-            'urls': ['turn:101.43.19.249:3478', 'turn:szfjg.cf:3478'],
-            'username': 'test',
+            'urls': ['turn:turn.szfjg.cf:3478'],
+            'username': 'payne',
             'credential': '123456',
             'credentialType': 'password'
         },
@@ -193,6 +193,7 @@ function conn() {
             pc.setRemoteDescription(new RTCSessionDescription(data));
 
             //create answer
+            setCodec();
             pc.createAnswer()
                 .then(getAnswer)
                 .catch(handleAnswerError);
@@ -404,6 +405,24 @@ function bindTracks() {
 
 }
 
+function setCodec() {
+    // note the following should be called before before calling either RTCPeerConnection.createOffer() or createAnswer()
+    let tcvr = pc.getTransceivers()[0];
+    let codecs = RTCRtpReceiver.getCapabilities('video').codecs;
+    let vp9_codecs = [];
+    // iterate over supported codecs and pull out the codecs we want
+    for (let i = 0; i < codecs.length; i++) {
+        console.info('codecs:', codecs[i].mimeType);
+        if (codecs[i].mimeType == "video/VP9") {
+            vp9_codecs.push(codecs[i]);
+        }
+    }
+    // currently not all browsers support setCodecPreferences
+    if (tcvr.setCodecPreferences != undefined) {
+        tcvr.setCodecPreferences(vp9_codecs);
+    }
+}
+
 function call() {
 
     if (state === 'joined_conn') {
@@ -413,6 +432,8 @@ function call() {
             offerToRecieveVideo: 1
         }
 
+        // set vp9
+        setCodec();
         pc.createOffer(offerOptions)
             .then(getOffer)
             .catch(handleOfferError);
