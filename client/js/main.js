@@ -407,7 +407,6 @@ function bindTracks() {
 
 function setCodec() {
     // note the following should be called before before calling either RTCPeerConnection.createOffer() or createAnswer()
-    let tcvr = pc.getTransceivers()[0];
     let codecs = RTCRtpReceiver.getCapabilities('video').codecs;
     let vp9_codecs = [];
     // iterate over supported codecs and pull out the codecs we want
@@ -418,6 +417,8 @@ function setCodec() {
         }
     }
     // currently not all browsers support setCodecPreferences
+    const transceiver = pc.getTransceivers().find(t => t.sender && t.sender.track === localStream.getVideoTracks()[0]);
+    transceiver.setCodecPreferences(codecs);
     if (tcvr.setCodecPreferences != undefined) {
         tcvr.setCodecPreferences(vp9_codecs);
     }
