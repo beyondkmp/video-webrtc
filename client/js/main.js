@@ -109,7 +109,6 @@ function conn() {
         //所以，在这个消息里应该带当前房间的用户数
         //
         //create conn and bind media track
-        isPCofRemote = isPc;
         createPeerConnection();
         bindTracks();
 
@@ -129,7 +128,6 @@ function conn() {
         }
 
         state = 'joined_conn';
-        isPCofRemote = isPc;
         setCodec();
         call();
 
