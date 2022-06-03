@@ -418,7 +418,6 @@ function setCodec() {
     }
     // currently not all browsers support setCodecPreferences
     const tcvr = pc.getTransceivers().find(t => t.sender && t.sender.track === localStream.getVideoTracks()[0]);
-    transceiver.setCodecPreferences(codecs);
     if (tcvr.setCodecPreferences != undefined) {
         tcvr.setCodecPreferences(vp9_codecs);
     }
