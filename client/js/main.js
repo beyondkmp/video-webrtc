@@ -426,7 +426,7 @@ function setCodec() {
     }
 }
 
-function call(isPc) {
+function call() {
 
     if (state === 'joined_conn') {
 
@@ -435,8 +435,6 @@ function call(isPc) {
             offerToRecieveVideo: 1
         }
 
-        // set vp9
-        isPc && setCodec();
         pc.createOffer(offerOptions)
             .then(getOffer)
             .catch(handleOfferError);
