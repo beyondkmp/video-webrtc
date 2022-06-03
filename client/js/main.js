@@ -412,13 +412,13 @@ function setCodec() {
     // iterate over supported codecs and pull out the codecs we want
     for (let i = 0; i < codecs.length; i++) {
         console.info('codecs:', codecs[i].mimeType);
-        if (codecs[i].mimeType == "video/VP9") {
+        if (codecs[i].mimeType == "video/AV1") {
             vp9_codecs.push(codecs[i]);
         }
     }
     // currently not all browsers support setCodecPreferences
     const tcvr = pc.getTransceivers().find(t => t.sender && t.sender.track === localStream.getVideoTracks()[0]);
-    if (tcvr.setCodecPreferences != undefined) {
+    if (tcvr.setCodecPreferences != undefined && vp9_codecs.length > 1) {
         tcvr.setCodecPreferences(vp9_codecs);
     }
 }
