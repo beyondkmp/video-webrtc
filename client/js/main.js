@@ -117,8 +117,8 @@ function conn() {
         console.log('receive joined message, state=', state);
     });
 
-    socket.on('otherjoin', (roomid, isPc) => {
-        console.log('receive joined message:', roomid, state);
+    socket.on('otherjoin', (roomid, socketId, isPc) => {
+        console.log('receive joined message:', roomid, socketId, isPc, state);
 
         //如果是多人的话，每上来一个人都要创建一个新的 peerConnection
         //
